@@ -1,79 +1,79 @@
 <!-- 
-    HW6 Starter code
-     Modified from: https://codepen.io/cathydutton/pen/GBcvo
-    -->
+    David Sosa
+    CPSC 332 - Web Development
+    Homework 6 - JQuery
+    Last Modified: October 22, 2024
+ -->
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HW6 - JQuery</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var seconds = "00";
+                var tens = "00";
+                var $displayTens = $("#tens");
+                var $displaySeconds = $("#seconds");
+                var $startButton = $("#button-start");
+                var $stopButton = $("#button-stop");
+                var $resetButton = $("#button-reset");
+                var interval;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW6 - JQuery</title>
-    <script>
-        window.onload = function () {
-            var seconds = "00";
-            var tens = "00";
-            var appendTens = document.getElementById("tens")
-            var appendSeconds = document.getElementById("seconds")
-            var buttonStart = document.getElementById('button-start');
-            var buttonStop = document.getElementById('button-stop');
-            var buttonReset = document.getElementById('button-reset');
-            var interval;
+                $startButton.on("click", function () {
+                    clearInterval(interval);
+                    interval = setInterval(startTimer, 10);
+                });
 
-            buttonStart.onclick = function () {
-                clearInterval(interval);
-                interval = setInterval(startTimer, 10);
-            }
+                $stopButton.on("click", function () {
+                    clearInterval(interval);
+                });
 
-            buttonStop.onclick = function () {
-                clearInterval(interval);
-            }
+                $resetButton.on("click", function () {
+                    clearInterval(interval);
+                    tens = "00";
+                    seconds = "00";
+                    $displayTens.text(tens);
+                    $displaySeconds.text(seconds);
+                });
 
-            buttonReset.onclick = function () {
-                clearInterval(interval);
-                tens = "00";
-                seconds = "00";
-                appendTens.innerHTML = tens;
-                appendSeconds.innerHTML = seconds;
-            }
+                function startTimer() {
+                    tens++;
 
-            function startTimer() {
-                tens++;
+                    if (tens < 9) {
+                        $displayTens.text("0" + tens);
+                    }
 
-                if (tens < 9) {
-                    appendTens.innerHTML = "0" + tens;
+                    if (tens > 9) {
+                        $displayTens.text(tens);
+                    }
+
+                    if (tens > 99) {
+                        console.log("seconds");
+                        seconds++;
+                        $displaySeconds.text("0" + seconds);
+                        tens = 0;
+                        $displayTens.text("00");
+                    }
+
+                    if (seconds > 9) {
+                        appendSeconds.text(seconds);
+                    }
                 }
+            });
+        </script>
+    </head>
 
-                if (tens > 9) {
-                    appendTens.innerHTML = tens;
-
-                }
-
-                if (tens > 99) {
-                    console.log("seconds");
-                    seconds++;
-                    appendSeconds.innerHTML = "0" + seconds;
-                    tens = 0;
-                    appendTens.innerHTML = "0" + 0;
-                }
-
-                if (seconds > 9) {
-                    appendSeconds.innerHTML = seconds;
-                }
-            }
-        }
-    </script>
-</head>
-
-<body>
-    <div class="wrapper">
-        <h1>Stopwatch</h1>
-        <h2>Vanilla JavaScript Stopwatch</h2>
-        <p><span id="seconds">00</span>:<span id="tens">00</span></p>
-        <button id="button-start">Start</button>
-        <button id="button-stop">Stop</button>
-        <button id="button-reset">Reset</button>
-    </div>
-</body>
-
+    <body>
+        <div class="wrapper">
+            <h1>Stopwatch</h1>
+            <h2>Vanilla JavaScript Stopwatch</h2>
+            <p><span id="seconds">00</span>:<span id="tens">00</span></p>
+            <button id="button-start">Start</button>
+            <button id="button-stop">Stop</button>
+            <button id="button-reset">Reset</button>
+        </div>
+    </body>
 </html>
