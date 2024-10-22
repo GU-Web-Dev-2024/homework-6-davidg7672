@@ -31,15 +31,21 @@
                 });
 
                 $startButton.on("click", function () {
+                    $myParagraph.css("background-color", "lightgreen");
                     clearInterval(interval);
                     interval = setInterval(startTimer, 10);
                 });
 
                 $stopButton.on("click", function () {
+                    if (tens === "00" && seconds === "00") {
+                        return;
+                    }
+                    $myParagraph.css("background-color", "#F67280");
                     clearInterval(interval);
                 });
 
                 $resetButton.on("click", function () {
+                    $myParagraph.css("background-color", "yellow");
                     clearInterval(interval);
                     tens = "00";
                     seconds = "00";
