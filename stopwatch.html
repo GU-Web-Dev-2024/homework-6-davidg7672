@@ -22,6 +22,14 @@
                 var $resetButton = $("#button-reset");
                 var interval;
 
+                let $myParagraph = $("p");
+                $myParagraph.attr("id", "timer");
+                $myParagraph.addClass("time-background");
+                $myParagraph.css({
+                    "background-color": "yellow",
+                    "box-shadow": "10px 5px 5px lightgray",
+                });
+
                 $startButton.on("click", function () {
                     clearInterval(interval);
                     interval = setInterval(startTimer, 10);
