@@ -15,6 +15,8 @@
             $(document).ready(function () {
                 var seconds = "00";
                 var tens = "00";
+                let animationInterval;
+
                 var $displayTens = $("#tens");
                 var $displaySeconds = $("#seconds");
                 var $startButton = $("#button-start");
@@ -38,16 +40,19 @@
 
                 let $myParagraph = $("p");
                 $myParagraph.attr("id", "timer");
-                $myParagraph.addClass("time-background");
+                $myParagraph.addClass("timer-background");
                 $myParagraph.css({
                     "background-color": "yellow",
                     "box-shadow": "10px 5px 5px lightgray",
+                    border: "2px solid black",
+                    transition: "opacity 0.3s ease",
                 });
 
                 $startButton.on("click", function () {
-                    $myParagraph.css("background-color", "lightgreen");
+                    $myParagraph.css("background-color", "green");
                     clearInterval(interval);
                     interval = setInterval(startTimer, 10);
+                    backgroundAnimation();
                 });
 
                 $stopButton.on("click", function () {
@@ -56,6 +61,7 @@
                     }
                     $myParagraph.css("background-color", "#F67280");
                     clearInterval(interval);
+                    stopAnimination();
                 });
 
                 $resetButton.on("click", function () {
@@ -65,6 +71,7 @@
                     seconds = "00";
                     $displayTens.text(tens);
                     $displaySeconds.text(seconds);
+                    stopAnimination();
                 });
 
                 function startTimer() {
@@ -87,8 +94,27 @@
                     }
 
                     if (seconds > 9) {
-                        appendSeconds.text(seconds);
+                        $displayTens.text(seconds);
                     }
+                }
+
+                let $timer = $(".timer-background");
+
+                function backgroundAnimation() {
+                    let opacity = 1.0;
+                    let increment = -0.04;
+                    animationInterval = setInterval(function () {
+                        opacity += increment;
+                        if (opacity <= 0.8 || opacity >= 1.0) {
+                            increment = -increment;
+                        }
+                        $timer.css("opacity", opacity);
+                    }, 100);
+                }
+
+                function stopAnimination() {
+                    clearInterval(animationInterval);
+                    $timer.css("opacity", 1.0);
                 }
             });
         </script>
