@@ -1,3 +1,9 @@
+/*
+    David Sosa
+    CPSC 332 - Web Development
+    Homework 6 - JQuery
+    Last Modified: October 22, 2024
+*/
 $(document).ready(function () {
     var seconds = "00";
     var tens = "00";
